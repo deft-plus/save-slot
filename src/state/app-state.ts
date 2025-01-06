@@ -10,8 +10,6 @@ import { PRESETS } from './presets';
 export type AppState = {
   /** All of the available game checklists the user has. */
   checklists: AppChecklistState[];
-  /** The currently active checklist. */
-  activeChecklist: AppChecklistState | null;
   /** Initializes the app state. */
   initialize: () => Promise<void>;
   /** Loads a checklist checklist. */
@@ -34,7 +32,6 @@ export type AppState = {
 export const useAppState = createStore<AppState>((set, get) => ({
   // Initial status.
   checklists: [],
-  activeChecklist: null,
   // Initialization to load the checklists.
   initialize: async () => {
     const checklistIds = await db.keys();
@@ -78,14 +75,8 @@ export const useAppState = createStore<AppState>((set, get) => ({
       isPreset: checklist.id === presetId ? false : checklist.isPreset,
     }));
 
-    db.get(presetId).then((cl) => db.set(presetId, { ...cl, isPreset: true }));
-
-    return new Promise((resolve) =>
-      setTimeout(() => {
-        set({ checklists: modifiedChecklists });
-        resolve();
-      }, 1000),
-    );
+    await db.get(presetId).then((cl) => db.set(presetId, { ...cl, isPreset: false }));
+    set({ checklists: modifiedChecklists });
   },
   // Collapses a category.
   collapseCategory: (path) => {

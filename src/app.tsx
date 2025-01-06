@@ -1,10 +1,12 @@
 import { useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router';
 
-import { useAppState } from '@/state/app-state';
+import { Drawer } from '@/components/drawer';
+import { useAppState } from '@/state';
 import { AboutView } from '@/views/about';
 import { ChecklistView } from '@/views/checklist';
 import { HomeView } from '@/views/home';
+import { NewChecklistView } from '@/views/new-checklist';
 import { NotFoundView } from '@/views/not-found';
 
 export function App() {
@@ -17,16 +19,15 @@ export function App() {
   }, []);
 
   return (
-    <>
-      <p>App Works!</p>
-      <BrowserRouter>
-        <Routes>
-          <Route index element={<HomeView />} />
-          <Route path="about" element={<AboutView />} />
-          <Route path="app/:checklistId" element={<ChecklistView />} />
-          <Route path="*" element={<NotFoundView />} />
-        </Routes>
-      </BrowserRouter>
-    </>
+    <BrowserRouter>
+      <Drawer />
+      <Routes>
+        <Route index element={<HomeView />} />
+        <Route path="about" element={<AboutView />} />
+        <Route path="new-checklist" element={<NewChecklistView />} />
+        <Route path="app/:checklistId" element={<ChecklistView />} />
+        <Route path="*" element={<NotFoundView />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
