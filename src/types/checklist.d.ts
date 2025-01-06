@@ -84,6 +84,21 @@ export declare global {
     map?: string;
     /** Tabs to show in the checklist page. */
     tabs?: AppChecklistTab[];
+    /** The fonts to use in the checklist page. */
+    fonts?: {
+      /** The font to use for the title. */
+      title: string;
+      /** The font to use for the subtitle. */
+      subtitle?: string;
+      /** The font to use for the category title. */
+      categoryTitle?: string;
+      /** The font to use for the category description. */
+      categoryDescription?: string;
+      /** The font to use for the item title. */
+      itemTitle?: string;
+      /** The font to use for the item description. */
+      itemDescription?: string;
+    };
     /** The image to show in the checklist page as background. */
     backgroundImage?: AppChecklistImage;
     /** The image to show as a thumbnail in the menu and the home page. */
