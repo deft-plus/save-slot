@@ -1,5 +1,5 @@
 {
-  "$schema": "../schema.json",
+  "$schema": "../../../public/schema.json",
   "id": "hollow-knight",
   "display-name": "Hollow Knight",
   "background-image": {

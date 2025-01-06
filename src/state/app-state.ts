@@ -1,0 +1,186 @@
+import { create as createStore } from 'zustand';
+
+import { db } from '@/lib';
+
+import { PRESETS } from './presets';
+
+/**
+ * App state to track the different checklists.
+ */
+export type AppState = {
+  /** All of the available game checklists the user has. */
+  checklists: AppChecklistState[];
+  /** The currently active checklist. */
+  activeChecklist: AppChecklistState | null;
+  /** Initializes the app state. */
+  initialize: () => Promise<void>;
+  /** Loads a checklist checklist. */
+  loadChecklist: (checklist: AppChecklist, isPreset?: boolean) => Promise<void>;
+  /** Loads a preset checklist. */
+  loadPreset: (presetId: string) => Promise<void>;
+  /** Toggles a category dropdown. */
+  collapseCategory: (path: string) => void;
+  /** Toggles a checklist item checkmark. */
+  checkItem: (path: string) => void;
+  /** Resets the selected checklist (Makes all the items unchecked). */
+  resetChecklist: (checklistId: string) => Promise<void>;
+  /** Removes a checklist. */
+  removeChecklist: (checklistId: string) => Promise<void>;
+};
+
+/**
+ * Hook to get the state of the app.
+ */
+export const useAppState = createStore<AppState>((set, get) => ({
+  // Initial status.
+  checklists: [],
+  activeChecklist: null,
+  // Initialization to load the checklists.
+  initialize: async () => {
+    const checklistIds = await db.keys();
+
+    await Promise.all(
+      PRESETS.filter((preset) => !checklistIds.includes(preset.id)).map((preset) =>
+        get().loadChecklist(preset, true),
+      ),
+    );
+
+    set({ checklists: await db.values() });
+  },
+  // Loads a checklist.
+  loadChecklist: async (checklist, isPreset = false) => {
+    const itemsCount = checklist.categories
+      // TODO: Validate if only to show the non-hidden categories or all.
+      // .filter((category) => !category.hidden)
+      .reduce((acc, category) => acc + category.items.length, 0);
+
+    const newChecklist = {
+      ...checklist,
+      itemsCompleted: 0,
+      itemsCount,
+      isCompleted: false,
+      isPreset,
+    } satisfies AppChecklistState;
+
+    await db.set(checklist.id, newChecklist);
+    set({ checklists: [...get().checklists, newChecklist] });
+  },
+  // Loads a preset checklist.
+  loadPreset: async (presetId) => {
+    const keys = await db.keys();
+
+    if (!keys.includes(presetId)) {
+      return;
+    }
+
+    const modifiedChecklists = get().checklists.map((checklist) => ({
+      ...checklist,
+      isPreset: checklist.id === presetId ? false : checklist.isPreset,
+    }));
+
+    db.get(presetId).then((cl) => db.set(presetId, { ...cl, isPreset: true }));
+
+    return new Promise((resolve) =>
+      setTimeout(() => {
+        set({ checklists: modifiedChecklists });
+        resolve();
+      }, 1000),
+    );
+  },
+  // Collapses a category.
+  collapseCategory: (path) => {
+    const [checklistId, categoryId] = path.split('.');
+
+    set({
+      checklists: get().checklists.map((checklist) => {
+        if (checklist.id !== checklistId) {
+          return checklist;
+        }
+
+        const modifiedCategories = checklist.categories.map((category) =>
+          category.id !== categoryId ? category : { ...category, collapsed: !category.collapsed },
+        );
+
+        db.get(checklistId).then((cl) =>
+          db.set(checklistId, { ...cl, categories: modifiedCategories }),
+        );
+
+        return { ...checklist, categories: modifiedCategories };
+      }),
+    });
+  },
+  // Checks an item.
+  checkItem: (path) => {
+    const [checklistId, categoryId, itemId] = path.split('.');
+
+    let itemCheckedCount = 0;
+
+    set({
+      checklists: get().checklists.map((checklist) => {
+        if (checklist.id !== checklistId) {
+          return checklist;
+        }
+
+        const modifiedCategories = checklist.categories.map((category) => {
+          const modifiedItems = category.items.map((item) => {
+            const newItem = item.id !== itemId ? item : { ...item, checked: !item.checked };
+            itemCheckedCount += newItem.checked ? 1 : 0;
+            return newItem;
+          });
+
+          return category.id !== categoryId ? category : { ...category, items: modifiedItems };
+        });
+
+        db.get(checklistId).then((cl) =>
+          db.set(checklistId, { ...cl, categories: modifiedCategories }),
+        );
+
+        return {
+          ...checklist,
+          itemsCompleted: itemCheckedCount,
+          isCompleted: itemCheckedCount === checklist.itemsCount,
+          categories: modifiedCategories,
+        };
+      }),
+    });
+  },
+  // Resets the checklist.
+  resetChecklist: async (checklistId) => {
+    set({
+      checklists: get().checklists.map((checklist) => {
+        if (checklist.id !== checklistId) {
+          return checklist;
+        }
+
+        const modifiedCategories = checklist.categories.map((category) => ({
+          ...category,
+          items: category.items.map((item) => ({ ...item, checked: false })),
+        }));
+
+        db.get(checklistId).then((cl) =>
+          db.set(checklistId, { ...cl, categories: modifiedCategories }),
+        );
+
+        return {
+          ...checklist,
+          itemsCompleted: 0,
+          isCompleted: false,
+          categories: modifiedCategories,
+        };
+      }),
+    });
+  },
+  // Removes a checklist.
+  removeChecklist: async (checklistId) => {
+    set({
+      checklists: get().checklists.filter((checklist) => {
+        if (checklist.id === checklistId) {
+          db.delete(checklistId);
+          return false;
+        }
+
+        return true;
+      }),
+    });
+  },
+}));

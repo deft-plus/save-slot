@@ -8,7 +8,6 @@ import reactPlugin from 'eslint-plugin-react';
 import reactHooksPlugin from 'eslint-plugin-react-hooks';
 import reactRefreshPlugin from 'eslint-plugin-react-refresh';
 import simpleImportSortPlugin from 'eslint-plugin-simple-import-sort';
-import globals from 'globals';
 
 export default [
   // Project and files settings.
@@ -21,10 +20,6 @@ export default [
         sourceType: 'module',
         tsconfigRootDir: '.',
         project: './tsconfig.json',
-      },
-      globals: {
-        ...globals.node,
-        ...globals.browser,
       },
     },
     settings: {
@@ -73,6 +68,7 @@ export default [
       'no-underscore-dangle': 'off',
       'one-var': ['error', 'never'],
       eqeqeq: 'warn',
+      'no-undef': 'off',
 
       'react/prop-types': 'off',
       'react/react-in-jsx-scope': 'off',
