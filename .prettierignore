@@ -1,0 +1,8 @@
+node_modules
+build
+public
+*.ico
+*.log
+*.lock
+*-lock.json
+generated

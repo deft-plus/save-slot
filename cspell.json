@@ -1,0 +1,18 @@
+{
+  "version": "0.2",
+  "allowCompoundWords": true,
+  "ignorePaths": [
+    "node_modules",
+    ".vscode",
+    ".git",
+    "package-lock.json",
+    "public",
+    ".prettierignore",
+    ".gitignore"
+  ],
+  "dictionaryDefinitions": [],
+  "dictionaries": [],
+  "ignoreWords": [],
+  "import": [],
+  "words": []
+}
