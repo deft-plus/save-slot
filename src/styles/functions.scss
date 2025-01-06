@@ -1,0 +1,10 @@
+/**
+ * Reduce the transparency of a color.
+ *
+ * @param {Color} $color - The color to reduce the transparency of.
+ * @param {Number} $transparency - The transparency of the color to reduce.
+ * @return {Color} - The new color with reduced transparency.
+ */
+@function reduce-transparency($color, $transparency: 100%) {
+  @return hsl(from $color h s l / $transparency);
+}

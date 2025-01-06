@@ -1,0 +1,29 @@
+html {
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  scroll-behavior: smooth;
+
+  // Default styling for the app (This might be override for each checklist).
+  font-family:
+    'Ubuntu Mono',
+    Roboto,
+    Segoe UI,
+    -apple-system,
+    Oxygen,
+    Ubuntu,
+    sans-serif;
+  color: var(--text-primary);
+  background-color: var(--background-main);
+}
+
+body {
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+}
