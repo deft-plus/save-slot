@@ -19,6 +19,13 @@
     },
     "title": "112% Completion Checklist"
   },
+  "tabs": [
+    {
+      "id": "mask-shards",
+      "title": "Mask Shards",
+      "categories": ["mask-shards"]
+    }
+  ],
   "categories": [
     {
       "id": "mask-shards",

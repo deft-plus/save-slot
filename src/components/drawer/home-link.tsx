@@ -1,12 +1,16 @@
 import { motion } from 'framer-motion';
 import { Link as RouterLink } from 'react-router';
 
+import { useDrawerState } from './state';
+
 const Link = motion.create(RouterLink);
 
 /**
  * Home link component.
  */
 export function HomeLink() {
+  const toggle = useDrawerState((state) => state.toggle);
+
   return (
     <motion.div
       className="home"
@@ -32,7 +36,7 @@ export function HomeLink() {
         },
       }}
     >
-      <Link to="/">
+      <Link to="/" onClick={() => toggle()}>
         <img src="/favicon.svg" alt="Save Slot icon" />
       </Link>
     </motion.div>

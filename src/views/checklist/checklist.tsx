@@ -10,11 +10,14 @@ export function ChecklistView() {
   const loadPreset = useAppState((state) => state.loadPreset);
 
   const checklist = checklists.find((checklist) => checklist.id === checklistId);
+  const doesTabExist = !!(tab === undefined || checklist?.tabs?.some((t) => t.id === tab));
+  const hasMap = !!checklist?.map;
+  const isTabValid = doesTabExist || (tab === 'map' && hasMap);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const syncActiveChecklist = async () => {
-      if (!checklist) {
+      if (!checklist || !isTabValid) {
         return;
       }
 
@@ -29,9 +32,9 @@ export function ChecklistView() {
 
     // Rule disabled since we don't want to run this effect on every render.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [checklists]);
+  }, [checklist?.id, isTabValid]);
 
-  if (!checklist) {
+  if (!checklist || !isTabValid) {
     return <NotFoundView />;
   }
 
@@ -41,7 +44,8 @@ export function ChecklistView() {
 
   return (
     <div>
-      Checklist works: {checklistId} | {tab}
+      Checklist works: {checklistId}
+      {tab && ` | ${tab}`}
     </div>
   );
 }

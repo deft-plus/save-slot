@@ -67,14 +67,14 @@ export function DrawerItem(props: DrawerItemProps) {
             ...(image.backgroundColor && { backgroundColor: `var(--${image.backgroundColor})` }),
           },
         })}
-        onButtonClick={() => {
+        onButtonClick={async () => {
           setLoading(true);
-          loadPreset(id).then(async () => {
-            await new Promise((resolve) => setTimeout(resolve, 1000));
-            setLoading(false);
-            toggle(false);
-            navigate(`/app/${id}`);
-          });
+          // Small delay to show loading state.
+          await new Promise((resolve) => setTimeout(resolve, 1000));
+          await loadPreset(id);
+          setLoading(false);
+          toggle(false);
+          navigate(`/app/${id}`);
         }}
         onLinkClick={() => {
           // Close only if the route is different.

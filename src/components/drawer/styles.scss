@@ -102,7 +102,8 @@
     padding-top: 11rem;
     padding-bottom: 5rem;
     flex-direction: column;
-    width: 20rem;
+    width: 23rem;
+    max-width: 100vw;
     height: 100vh;
     background-color: var(--background-sheet);
     overflow-x: auto;
