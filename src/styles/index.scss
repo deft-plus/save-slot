@@ -2,4 +2,7 @@
 @use './reset';
 @use './base';
 
-@use '../components/drawer/styles';
+@use '../components/container/styles' as container;
+@use '../components/drawer/styles' as drawer;
+
+@use '../views/home/styles' as home;

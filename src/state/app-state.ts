@@ -178,6 +178,12 @@ export const useAppState = createStore<AppState>((set, get) => ({
   },
   // Removes a checklist.
   removeChecklist: async (checklistId) => {
+    const isPreset = get().checklists.find((checklist) => checklist.id === checklistId)?.isPreset;
+
+    if (isPreset) {
+      return;
+    }
+
     set({
       checklists: get().checklists.filter((checklist) => {
         if (checklist.id === checklistId) {
@@ -188,5 +194,6 @@ export const useAppState = createStore<AppState>((set, get) => ({
         return true;
       }),
     });
+    get().initialize(); // This loads the presets again.
   },
 }));

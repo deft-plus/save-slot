@@ -26,6 +26,7 @@ export function DrawerItem(props: DrawerItemProps) {
 
   const toggle = useDrawerState((state) => state.toggle);
   const loadPreset = useAppState((state) => state.loadPreset);
+  const removeChecklist = useAppState((state) => state.removeChecklist);
 
   return (
     <motion.li
@@ -54,6 +55,15 @@ export function DrawerItem(props: DrawerItemProps) {
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
     >
+      <button
+        aria-label="Remove Checklist"
+        className="remove"
+        onClick={() => {
+          removeChecklist(id);
+        }}
+      >
+        Delete
+      </button>
       <ItemLink
         id={id}
         isPreset={isPreset}
