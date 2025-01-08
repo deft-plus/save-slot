@@ -25,7 +25,7 @@ export function App() {
         <Route index element={<HomeView />} />
         <Route path="about" element={<AboutView />} />
         <Route path="new-checklist" element={<NewChecklistView />} />
-        <Route path="app/:checklistId" element={<ChecklistView />} />
+        <Route path="app/:checklistId/:tab" element={<ChecklistView />} />
         <Route path="*" element={<NotFoundView />} />
       </Routes>
     </BrowserRouter>

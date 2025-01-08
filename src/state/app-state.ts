@@ -112,11 +112,26 @@ export const useAppState = createStore<AppState>((set, get) => ({
           return checklist;
         }
 
+        const itemClicked = checklist.categories
+          .find((category) => category.id === categoryId)
+          ?.items.find((item) => item.id === itemId);
+
+        const itemsToCheck = itemClicked?.related ?? [];
+        const itemStatus = !!itemClicked?.checked; // Use the current status for the related items.
+
+        itemsToCheck.unshift(`${categoryId}.${itemId}`);
+
         const modifiedCategories = checklist.categories.map((category) => {
           const modifiedItems = category.items.map((item) => {
-            const newItem = item.id !== itemId ? item : { ...item, checked: !item.checked };
-            itemCheckedCount += newItem.checked ? 1 : 0;
-            return newItem;
+            const shouldChange = itemsToCheck.includes(`${category.id}.${item.id}`);
+
+            if (!shouldChange) {
+              return item;
+            }
+
+            const modifiedItem = { ...item, checked: !itemStatus };
+            itemCheckedCount += modifiedItem.checked ? 1 : 0;
+            return modifiedItem;
           });
 
           return category.id !== categoryId ? category : { ...category, items: modifiedItems };

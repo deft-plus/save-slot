@@ -21,6 +21,12 @@ export declare global {
     description: string;
     /** The url for more information about the item (Like a wiki). */
     link?: string;
+    /**
+     * The paths (categoryId.itemId) for other items to be checked when this item is checked (Keep
+     * in mind this does not concatenate the related items, it a item in this list has more related
+     * items it won't check those).
+     */
+    related?: string[];
     /** The url to the map ref. */
     map?: string;
     /** A longer and more detailed explanation of the item. */

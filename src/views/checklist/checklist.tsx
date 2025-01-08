@@ -5,9 +5,10 @@ import { useAppState } from '@/state';
 import { NotFoundView } from '@/views/not-found';
 
 export function ChecklistView() {
-  const { checklistId } = useParams();
+  const { checklistId, tab } = useParams();
   const checklists = useAppState((state) => state.checklists);
   const loadPreset = useAppState((state) => state.loadPreset);
+  const checkItem = useAppState((state) => state.checkItem);
 
   const checklist = checklists.find((checklist) => checklist.id === checklistId);
   const [loading, setLoading] = useState(true);
@@ -39,5 +40,10 @@ export function ChecklistView() {
     return <div>Loading...</div>;
   }
 
-  return <div>Checklist works: {checklistId}</div>;
+  return (
+    <div>
+      Checklist works: {checklistId} | {tab}
+      <button onClick={() => checkItem(checklistId + '.mask-shards.mask-shard-1')}>Toggle</button>
+    </div>
+  );
 }

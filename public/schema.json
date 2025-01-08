@@ -49,6 +49,13 @@
           "type": "string",
           "description": "The url for more information about the item (Like a wiki)."
         },
+        "related": {
+          "type": "array",
+          "description": "The paths (categoryId.itemId) for other items to be checked when this item is checked (Keep in mind this does not concatenate the related items, it a item in this list has more related items it won't check those).",
+          "items": {
+            "type": "string"
+          }
+        },
         "map": {
           "type": "string",
           "description": "The url to the map ref."
