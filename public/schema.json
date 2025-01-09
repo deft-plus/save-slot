@@ -143,7 +143,7 @@
     "AppChecklist": {
       "type": "object",
       "description": "A list of achievements for a game to complete.",
-      "required": ["$schema", "id", "display-name", "page-header", "categories"],
+      "required": ["$schema", "id", "display-name", "page-header", "categories", "theme"],
       "additionalProperties": false,
       "properties": {
         "$schema": {
@@ -231,6 +231,11 @@
               "description": "The font to use for the text."
             }
           }
+        },
+        "theme": {
+          "type": "string",
+          "description": "The theme to use in the checklist page.",
+          "pattern": "^(light|dark|device)$"
         },
         "background-image": {
           "$ref": "#/definitions/AppChecklistImage",

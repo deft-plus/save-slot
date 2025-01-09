@@ -29,7 +29,7 @@ export function DrawerContent(props: PropsWithChildren) {
               },
             }),
             closed: {
-              clipPath: 'circle(25px at 40px 40px)',
+              clipPath: 'circle(25px at 45px 45px)',
               transition: {
                 delay: 0.1,
                 type: 'spring',

@@ -4,6 +4,8 @@ import { useParams } from 'react-router';
 import { useAppState } from '@/state';
 import { NotFoundView } from '@/views/not-found';
 
+import { Theme } from './theme';
+
 export function ChecklistView() {
   const { checklistId, tab } = useParams();
   const checklists = useAppState((state) => state.checklists);
@@ -46,6 +48,7 @@ export function ChecklistView() {
     <div>
       Checklist works: {checklistId}
       {tab && ` | ${tab}`}
+      <Theme image={checklist.backgroundImage} fonts={checklist.fonts} theme={checklist.theme} />
     </div>
   );
 }

@@ -2,8 +2,9 @@
   "$schema": "../../../public/schema.json",
   "id": "hollow-knight",
   "display-name": "Hollow Knight",
+  "theme": "dark",
   "background-image": {
-    "background-color": "background-dark",
+    "background-color": "background-main-dark",
     "text-color": "text-light",
     "src": "/images/presets/hollow-knight/background.png"
   },

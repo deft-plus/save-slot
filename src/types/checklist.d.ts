@@ -75,6 +75,8 @@ export declare global {
     id: string;
     /** The name of the game to show in the menu. */
     displayName: string;
+    /* The theme to use in the checklist page.. */
+    theme: 'light' | 'dark' | 'device';
     /** Header properties to show in the checklist page. */
     pageHeader: {
       /** Image to show in the middle of the checklist at the top. */
