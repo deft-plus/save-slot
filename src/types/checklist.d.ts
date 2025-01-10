@@ -118,9 +118,11 @@ export declare global {
     /** Count of the items completed (percentage is calculated in the client). */
     itemsCompleted: number;
     /** Count of the items. */
-    itemsCount: number;
+    itemCount: number;
     /** Property to check if all items are completed. */
     isCompleted: boolean;
+    /** The percentage of the items completed. */
+    completePercentage: number;
     /** Property to check if os only a present or an available checklist. */
     isPreset: boolean;
   }

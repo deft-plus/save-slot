@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { type ComponentProps, type PropsWithChildren, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router';
+import { Link, matchPath, useLocation, useNavigate } from 'react-router';
 
 import { useAppState } from '@/state';
 
@@ -21,7 +21,8 @@ export function DrawerItem(props: DrawerItemProps) {
 
   const [loading, setLoading] = useState(false);
 
-  const { checklistId } = useParams();
+  const { pathname } = useLocation();
+  const { checklistId } = matchPath({ path: '/app/:checklistId' }, pathname)?.params ?? {};
   const navigate = useNavigate();
 
   const toggle = useDrawerState((state) => state.toggle);
@@ -59,10 +60,15 @@ export function DrawerItem(props: DrawerItemProps) {
         aria-label="Remove Checklist"
         className="remove"
         onClick={() => {
+          // Go back to home if the current checklist is removed.
+          if (checklistId === id) {
+            navigate('/');
+            toggle(false);
+          }
           removeChecklist(id);
         }}
       >
-        Delete
+        Del
       </button>
       <ItemLink
         id={id}
@@ -119,16 +125,15 @@ function ItemCard(props: ItemCardProps) {
   const {
     displayName,
     itemsCompleted,
-    itemsCount,
+    itemCount,
     thumbnailImage: image,
     isPreset,
     isCompleted,
+    completePercentage,
   } = props;
 
-  const completionPercentage = Math.round((itemsCompleted / itemsCount) * 100);
-
   return (
-    <div>
+    <div className="data">
       {image && (
         <img
           style={{
@@ -141,12 +146,13 @@ function ItemCard(props: ItemCardProps) {
         />
       )}
       <div>
-        <h4>{displayName}</h4>
+        <h4>
+          {displayName} • {completePercentage}%
+        </h4>
         <div>
-          {itemsCompleted}/{itemsCount}
+          {itemsCompleted}/{itemCount}
         </div>
-        <div>{completionPercentage}/100%</div>
-        {isPreset && <div>Load Preset</div>}
+        {isPreset && <div className="message">Load Preset</div>}
         {isCompleted && <div>Completed</div>}
       </div>
     </div>

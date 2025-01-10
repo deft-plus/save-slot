@@ -46,7 +46,7 @@ export const useAppState = createStore<AppState>((set, get) => ({
   },
   // Loads a checklist.
   loadChecklist: async (checklist, isPreset = false) => {
-    const itemsCount = checklist.categories
+    const itemCount = checklist.categories
       // TODO: Validate if only to show the non-hidden categories or all.
       // .filter((category) => !category.hidden)
       .reduce((acc, category) => acc + category.items.length, 0);
@@ -54,9 +54,10 @@ export const useAppState = createStore<AppState>((set, get) => ({
     const newChecklist = {
       ...checklist,
       itemsCompleted: 0,
-      itemsCount,
+      itemCount,
       isCompleted: false,
       isPreset,
+      completePercentage: 0,
     } satisfies AppChecklistState;
 
     await db.set(checklist.id, newChecklist);
@@ -144,7 +145,8 @@ export const useAppState = createStore<AppState>((set, get) => ({
         return {
           ...checklist,
           itemsCompleted: itemCheckedCount,
-          isCompleted: itemCheckedCount === checklist.itemsCount,
+          isCompleted: itemCheckedCount === checklist.itemCount,
+          completePercentage: Math.round((itemCheckedCount / checklist.itemCount) * 100),
           categories: modifiedCategories,
         };
       }),
@@ -170,6 +172,7 @@ export const useAppState = createStore<AppState>((set, get) => ({
         return {
           ...checklist,
           itemsCompleted: 0,
+          completePercentage: 0,
           isCompleted: false,
           categories: modifiedCategories,
         };

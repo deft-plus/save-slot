@@ -13,9 +13,12 @@ export type ActiveChecklistState = {
 const ActiveChecklistStateContext = createContext<ActiveChecklistState | null>(null);
 
 export function ActiveChecklistProvider(
-  props: PropsWithChildren<{ checklistId?: string; tab?: string }>,
+  props: PropsWithChildren<{ value: { checklistId?: string; tab?: string } }>,
 ) {
-  const { children, checklistId, tab } = props;
+  const {
+    children,
+    value: { checklistId, tab },
+  } = props;
 
   const checklists = useAppState((state) => state.checklists);
   const loadPreset = useAppState((state) => state.loadPreset);
