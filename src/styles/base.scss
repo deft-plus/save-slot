@@ -12,8 +12,8 @@ html {
 
   // Default styling for the app (This might be override for each checklist).
   font-family: var(--font-title);
-  color: var(--selected-text);
-  background-color: var(--selected-background);
+  color: var(--text-primary);
+  background-color: var(--background-main);
 }
 
 body {

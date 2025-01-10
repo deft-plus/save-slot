@@ -1,3 +1,12 @@
+import { Helmet } from 'react-helmet-async';
+
 export function AboutView() {
-  return <div>About works!</div>;
+  return (
+    <>
+      <Helmet>
+        <title>Save Slot • About</title>
+      </Helmet>
+      <div>About works!</div>
+    </>
+  );
 }

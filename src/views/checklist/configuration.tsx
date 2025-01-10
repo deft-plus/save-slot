@@ -1,26 +1,24 @@
-/**
- * Theme props.
- */
-export type ThemeProps = {
-  image: AppChecklistState['backgroundImage'];
-  fonts: AppChecklistState['fonts'];
-  theme: AppChecklistState['theme'];
-};
+import { Helmet } from 'react-helmet-async';
+
+import { useActiveChecklist } from './active-checklist-state';
 
 /**
- * Theme component.
+ * Configuration component.
  *
- * Components updates the theme of the app based on the provided props.
+ * Components updates the theme of the app based on the provided props. Also updates additional
+ * parts of the web like the title and description.
  */
-export function Theme(props: ThemeProps) {
-  const { image, fonts, theme } = props;
+export function Configuration() {
+  const checklist = useActiveChecklist();
+
+  const { backgroundImage: image, fonts, theme } = checklist;
 
   const backgroundVariables =
     image &&
     `
     --selected-image-url: url(${image.src});
-    --selected-background: var(--${image.backgroundColor ? image.backgroundColor : 'background-main'});
-    --selected-text: var(--${image.textColor ? image.textColor : 'text-primary'});
+    ${image.backgroundColor && `--background-main: var(--${image.backgroundColor});`}
+    ${image.textColor && `--text-primary: var(--${image.textColor});`}
   `;
 
   const fontsVariables =
@@ -46,12 +44,19 @@ export function Theme(props: ThemeProps) {
   `;
 
   return (
-    <style>{`
-      :root {
-        ${themeVariables}
-        ${backgroundVariables}
-        ${fontsVariables}
-      }
+    <Helmet>
+      <title>Save Slot • {checklist.displayName}</title>
+      {checklist.pageHeader.subtitle && (
+        <meta name="description" content={checklist.pageHeader.subtitle} />
+      )}
+
+      <style>{`
+        :root {
+          ${themeVariables}
+          ${backgroundVariables}
+          ${fontsVariables}
+          }
     `}</style>
+    </Helmet>
   );
 }
