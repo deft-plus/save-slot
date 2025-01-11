@@ -30,6 +30,8 @@ export function Configuration() {
       ${fonts.categoryDescription && `--font-category-description: ${fonts.categoryDescription};`}
       ${fonts.itemTitle && `--font-item-title: ${fonts.itemTitle};`}
       ${fonts.itemDescription && `--font-item-description: ${fonts.itemDescription};`}
+      ${fonts.text && `--font-text: ${fonts.text};`}
+      ${fonts.tab && `--font-tab: ${fonts.tab};`}
   `;
 
   const themeVariables =
@@ -48,6 +50,18 @@ export function Configuration() {
       <title>Save Slot • {checklist.displayName}</title>
       {checklist.pageHeader.subtitle && (
         <meta name="description" content={checklist.pageHeader.subtitle} />
+      )}
+      {checklist.fonts?.imports?.length && (
+        <>
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+          {checklist.fonts?.imports?.map(
+            (fontImport) =>
+              fontImport.startsWith('https://fonts.googleapis.com/') && (
+                <link key={fontImport} rel="stylesheet" href={fontImport} />
+              ),
+          )}
+        </>
       )}
 
       <style>{`

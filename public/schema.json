@@ -202,6 +202,13 @@
           "description": "The fonts to use in the checklist page.",
           "additionalProperties": false,
           "properties": {
+            "imports": {
+              "type": "array",
+              "description": "The urls to import the fonts (Can only be from https://fonts.google.com).",
+              "items": {
+                "type": "string"
+              }
+            },
             "title": {
               "type": "string",
               "description": "The font to use for the title."
@@ -229,6 +236,10 @@
             "text": {
               "type": "string",
               "description": "The font to use for the text."
+            },
+            "tab": {
+              "type": "string",
+              "description": "The font to use for the tab."
             }
           }
         },

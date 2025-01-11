@@ -94,6 +94,8 @@ export declare global {
     tabs?: AppChecklistTab[];
     /** The fonts to use in the checklist page. */
     fonts?: {
+      /** The urls to import the fonts (Can only be from https://fonts.google.com). */
+      imports?: string[];
       /** The font to use for the title. */
       title: string;
       /** The font to use for the subtitle. */
@@ -106,6 +108,10 @@ export declare global {
       itemTitle?: string;
       /** The font to use for the item description. */
       itemDescription?: string;
+      /** The font to use for the text. */
+      text?: string;
+      /** The font to use for the tab. */
+      tab?: string;
     };
     /** The image to show in the checklist page as background. */
     backgroundImage?: AppChecklistImage;

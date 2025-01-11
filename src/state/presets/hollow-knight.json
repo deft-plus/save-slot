@@ -18,6 +18,7 @@
       "src": "/images/presets/hollow-knight/title.png",
       "alt": "Image with the hollow knight title"
     },
+    "subtitle": "Only the most dedicated adventurers will be able to complete this checklist",
     "title": "112% Completion Checklist"
   },
   "tabs": [
@@ -99,7 +100,7 @@
       "items": [
         {
           "id": "mask-shard-21",
-          "title": "Mask Shard #1",
+          "title": "Mask Shard #21",
           "description": "Acquired from the Snail Shaman in Greenpath",
           "link": "https://hollowknight.fandom.com/wiki/Mask_Shard",
           "more": "Can be found in the Snail Shaman's hut in Greenpath",
@@ -110,7 +111,7 @@
         },
         {
           "id": "mask-shard-22",
-          "title": "Mask Shard #2",
+          "title": "Mask Shard #22",
           "description": "Acquired from the Snail Shaman in Greenpath",
           "link": "https://hollowknight.fandom.com/wiki/Mask_Shard",
           "more": "Can be found in the Snail Shaman's hut in Greenpath",
@@ -121,7 +122,7 @@
         },
         {
           "id": "mask-shard-23",
-          "title": "Mask Shard #3",
+          "title": "Mask Shard #23",
           "description": "Acquired from the Snail Shaman in Greenpath",
           "link": "https://hollowknight.fandom.com/wiki/Mask_Shard",
           "more": "Can be found in the Snail Shaman's hut in Greenpath",
@@ -132,7 +133,7 @@
         },
         {
           "id": "mask-shard-24",
-          "title": "Mask Shard #4",
+          "title": "Mask Shard #24",
           "description": "Acquired from the Snail Shaman in Greenpath",
           "link": "https://hollowknight.fandom.com/wiki/Mask_Shard",
           "more": "Can be found in the Snail Shaman's hut in Greenpath",

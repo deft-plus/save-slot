@@ -178,6 +178,7 @@ export const useAppState = createStore<AppState>((set, get) => ({
         };
       }),
     });
+    await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate a delay.
   },
   // Removes a checklist.
   removeChecklist: async (checklistId) => {
