@@ -1,0 +1,192 @@
+@use '~/functions';
+@use '~/mixins';
+
+/** Mixin for the drawer and the standalone component. */
+@mixin navigation {
+  & > .home {
+    position: absolute;
+    background-color: var(--background-sheet);
+    top: 0rem;
+    left: 0px;
+    width: 100%;
+    height: 10rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 20;
+
+    a {
+      margin-top: var(--space-5);
+
+      img {
+        height: 40px;
+      }
+    }
+  }
+
+  & > .title {
+    font-size: 1.6rem;
+    font-weight: 200;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  & > .navigation {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    padding: var(--space-3) var(--space-0);
+
+    & > .item {
+      display: flex;
+      width: 100%;
+      cursor: pointer;
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+      padding: 0.1rem;
+
+      & > button,
+      & > a {
+        cursor: pointer;
+        border-radius: 10px;
+        display: flex;
+        padding: var(--space-3);
+        width: 100%;
+
+        & > .data {
+          width: 100%;
+          position: relative;
+
+          .message {
+            position: absolute;
+            right: var(--space-0);
+            bottom: var(--space-0);
+            text-align: right;
+          }
+        }
+      }
+
+      & > .remove {
+        width: fit-content;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--red);
+        position: absolute;
+        padding: 0.2rem var(--space-1);
+        top: var(--space-1);
+        right: var(--space-1);
+        z-index: 10;
+        border-radius: 10px;
+        font-size: 0.8rem;
+      }
+    }
+
+    &.available {
+      margin-bottom: var(--space-3);
+    }
+
+    &.presets {
+      & > .item {
+        border: 2px dashed var(--text-disabled);
+
+        & > .remove {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+.drawer {
+  width: fit-content;
+  height: fit-content;
+  position: fixed;
+  z-index: var(--z-drawer);
+  top: 0px;
+  left: 0px;
+
+  & > .toggle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    margin: var(--space-3);
+    background-color: var(--background-sheet);
+    position: absolute;
+    z-index: calc(var(--z-drawer) - 100);
+    border-radius: 50%;
+    cursor: pointer;
+
+    path {
+      stroke: var(--text-primary);
+    }
+  }
+
+  & > .content {
+    --_padding: var(--space-2);
+
+    display: flex;
+    padding: var(--_padding);
+    padding-top: var(--space-9);
+    padding-bottom: var(--space-6);
+    flex-direction: column;
+    width: 23rem;
+    max-width: 100vw;
+    height: 100vh;
+    background-color: var(--background-sheet);
+    overflow-x: auto;
+    z-index: calc(var(--z-drawer) - 200);
+
+    @include navigation;
+
+    & > .new-checklist {
+      background-color: var(--background-sheet);
+      padding: 2rem var(--_padding) var(--_padding);
+      position: absolute;
+      width: 100%;
+      left: 0;
+      bottom: 0;
+
+      & > a {
+        display: flex;
+        padding: var(--space-3);
+        cursor: pointer;
+        width: 100%;
+        border-radius: 5px;
+        border: 2px dashed #323232;
+      }
+    }
+  }
+
+  & > .backdrop {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    width: 100vw;
+    height: 100vh;
+    background-color: functions.reduce-transparency(var(--black), 15%);
+    z-index: -1;
+  }
+}
+
+.standalone-navigation {
+  width: 100%;
+
+  @include navigation;
+
+  & > .navigation {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(10rem, 1fr));
+
+    @include mixins.small-device {
+      gap: 0.2rem;
+      grid-template-columns: repeat(1, minmax(10rem, 1fr));
+    }
+  }
+}

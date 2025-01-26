@@ -1,0 +1,148 @@
+{
+  "$schema": "../../../public/schema.json",
+  "id": "hollow-knight",
+  "display-name": "Hollow Knight",
+  "theme": "dark",
+  "background-image": {
+    "background-color": "background-main-dark",
+    "text-color": "text-light",
+    "src": "/images/presets/hollow-knight/background.png"
+  },
+  "thumbnail-image": {
+    "text-color": "text-light",
+    "src": "/images/presets/hollow-knight/title.png",
+    "alt": "Image with the hollow knight title"
+  },
+  "page-header": {
+    "image": {
+      "src": "/images/presets/hollow-knight/title.png",
+      "alt": "Image with the hollow knight title"
+    },
+    "subtitle": "Only the most dedicated adventurers will be able to complete this checklist",
+    "title": "112% Completion Checklist"
+  },
+  "tabs": [
+    {
+      "id": "mask-shards",
+      "title": "Mask Shards",
+      "categories": ["mask-shards"]
+    }
+  ],
+  "categories": [
+    {
+      "id": "mask-shards",
+      "title": "Mask Shards",
+      "description": "Mask shards increase the knight's health by 1 mask",
+      "image": {
+        "src": "/images/presets/hollow-knight/health-mask.png",
+        "alt": "Mask Shard icon"
+      },
+      "items": [
+        {
+          "id": "mask-shard-1",
+          "title": "Mask Shard #1",
+          "description": "Acquired from the Snail Shaman in Greenpath",
+          "link": "https://hollowknight.fandom.com/wiki/Mask_Shard",
+          "more": "Can be found in the Snail Shaman's hut in Greenpath",
+          "related": [
+            "mask-shards.mask-shard-2",
+            "mask-shards.mask-shard-3",
+            "mask-shards.mask-shard-4"
+          ],
+          "icon": {
+            "src": "/images/presets/hollow-knight/health-piece.png",
+            "alt": "Mask Shard icon"
+          }
+        },
+        {
+          "id": "mask-shard-2",
+          "title": "Mask Shard #2",
+          "description": "Acquired from the Snail Shaman in Greenpath",
+          "link": "https://hollowknight.fandom.com/wiki/Mask_Shard",
+          "more": "Can be found in the Snail Shaman's hut in Greenpath",
+          "icon": {
+            "src": "/images/presets/hollow-knight/health-piece.png",
+            "alt": "Mask Shard icon"
+          }
+        },
+        {
+          "id": "mask-shard-3",
+          "title": "Mask Shard #3",
+          "description": "Acquired from the Snail Shaman in Greenpath",
+          "link": "https://hollowknight.fandom.com/wiki/Mask_Shard",
+          "more": "Can be found in the Snail Shaman's hut in Greenpath",
+          "icon": {
+            "src": "/images/presets/hollow-knight/health-piece.png",
+            "alt": "Mask Shard icon"
+          }
+        },
+        {
+          "id": "mask-shard-4",
+          "title": "Mask Shard #4",
+          "description": "Acquired from the Snail Shaman in Greenpath",
+          "link": "https://hollowknight.fandom.com/wiki/Mask_Shard",
+          "more": "Can be found in the Snail Shaman's hut in Greenpath",
+          "icon": {
+            "src": "/images/presets/hollow-knight/health-piece.png",
+            "alt": "Mask Shard icon"
+          }
+        }
+      ]
+    },
+    {
+      "id": "mask-shards-2",
+      "title": "Mask Shards",
+      "description": "Mask shards increase the knight's health by 1 mask",
+      "image": {
+        "src": "/images/presets/hollow-knight/health-mask.png",
+        "alt": "Mask Shard icon"
+      },
+      "items": [
+        {
+          "id": "mask-shard-21",
+          "title": "Mask Shard #21",
+          "description": "Acquired from the Snail Shaman in Greenpath",
+          "link": "https://hollowknight.fandom.com/wiki/Mask_Shard",
+          "more": "Can be found in the Snail Shaman's hut in Greenpath",
+          "icon": {
+            "src": "/images/presets/hollow-knight/health-piece.png",
+            "alt": "Mask Shard icon"
+          }
+        },
+        {
+          "id": "mask-shard-22",
+          "title": "Mask Shard #22",
+          "description": "Acquired from the Snail Shaman in Greenpath",
+          "link": "https://hollowknight.fandom.com/wiki/Mask_Shard",
+          "more": "Can be found in the Snail Shaman's hut in Greenpath",
+          "icon": {
+            "src": "/images/presets/hollow-knight/health-piece.png",
+            "alt": "Mask Shard icon"
+          }
+        },
+        {
+          "id": "mask-shard-23",
+          "title": "Mask Shard #23",
+          "description": "Acquired from the Snail Shaman in Greenpath",
+          "link": "https://hollowknight.fandom.com/wiki/Mask_Shard",
+          "more": "Can be found in the Snail Shaman's hut in Greenpath",
+          "icon": {
+            "src": "/images/presets/hollow-knight/health-piece.png",
+            "alt": "Mask Shard icon"
+          }
+        },
+        {
+          "id": "mask-shard-24",
+          "title": "Mask Shard #24",
+          "description": "Acquired from the Snail Shaman in Greenpath",
+          "link": "https://hollowknight.fandom.com/wiki/Mask_Shard",
+          "more": "Can be found in the Snail Shaman's hut in Greenpath",
+          "icon": {
+            "src": "/images/presets/hollow-knight/health-piece.png",
+            "alt": "Mask Shard icon"
+          }
+        }
+      ]
+    }
+  ]
+}

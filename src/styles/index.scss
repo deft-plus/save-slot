@@ -1,3 +1,9 @@
 @use './variables';
 @use './reset';
 @use './base';
+
+@use '../components/container/styles' as container;
+@use '../components/drawer/styles' as drawer;
+
+@use '../views/home/styles' as home;
+@use '../views/checklist/styles' as checklist;

@@ -1,0 +1,262 @@
+{
+  "$id": "https://game-completion-checklist.github.io/game-completion-checklist/schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$ref": "#/definitions/AppChecklist",
+  "definitions": {
+    "AppChecklistImage": {
+      "type": "object",
+      "description": "Needed properties for a checklist image.",
+      "additionalProperties": false,
+      "required": ["src"],
+      "properties": {
+        "src": {
+          "type": "string",
+          "description": "The url of the image for the title."
+        },
+        "alt": {
+          "type": "string",
+          "description": "The alt text for the image."
+        },
+        "background-color": {
+          "type": "string",
+          "description": "The color of the background in case the url does not work."
+        },
+        "text-color": {
+          "type": "string",
+          "description": "The color of the text on top of the image."
+        }
+      }
+    },
+    "AppChecklistItem": {
+      "type": "object",
+      "description": "Needed properties for a checklist item.",
+      "additionalProperties": false,
+      "required": ["id", "title", "description"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier for an item."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the item."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the item."
+        },
+        "link": {
+          "type": "string",
+          "description": "The url for more information about the item (Like a wiki)."
+        },
+        "related": {
+          "type": "array",
+          "description": "The paths (categoryId.itemId) for other items to be checked when this item is checked (Keep in mind this does not concatenate the related items, it a item in this list has more related items it won't check those).",
+          "items": {
+            "type": "string"
+          }
+        },
+        "map": {
+          "type": "string",
+          "description": "The url to the map ref."
+        },
+        "more": {
+          "type": "string",
+          "description": "A longer and more detailed explanation of the item."
+        },
+        "icon": {
+          "$ref": "#/definitions/AppChecklistImage",
+          "description": "Icon to show in the item."
+        },
+        "checked": {
+          "type": "boolean",
+          "description": "If the item is checked."
+        }
+      }
+    },
+    "AppChecklistCategory": {
+      "type": "object",
+      "description": "Needed properties for a game checklist.",
+      "additionalProperties": false,
+      "required": ["id", "title", "items"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier for an achievement."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the achievement."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the achievement."
+        },
+        "image": {
+          "$ref": "#/definitions/AppChecklistImage",
+          "description": "The url of the image for the achievement."
+        },
+        "hidden": {
+          "type": "boolean",
+          "description": "If the category should be hidden in the main checklist page."
+        },
+        "collapsed": {
+          "type": "boolean",
+          "description": "If the category is collapsed."
+        },
+        "items": {
+          "type": "array",
+          "description": "The list of items for the achievement.",
+          "items": {
+            "$ref": "#/definitions/AppChecklistItem"
+          }
+        }
+      }
+    },
+    "AppChecklistTab": {
+      "type": "object",
+      "description": "A tab to show in the checklist page.",
+      "additionalProperties": false,
+      "required": ["id", "title", "categories"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier for a tab."
+        },
+        "title": {
+          "type": "string",
+          "description": "Name of the tab to show in the menu."
+        },
+        "icon": {
+          "$ref": "#/definitions/AppChecklistImage",
+          "description": "The icon to show in the tab."
+        },
+        "categories": {
+          "type": "array",
+          "description": "List of the ids of the categories to show in the tab.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AppChecklist": {
+      "type": "object",
+      "description": "A list of achievements for a game to complete.",
+      "required": ["$schema", "id", "display-name", "page-header", "categories", "theme"],
+      "additionalProperties": false,
+      "properties": {
+        "$schema": {
+          "type": "string",
+          "description": "The schema of the data."
+        },
+        "id": {
+          "type": "string",
+          "description": "The unique identifier for a checklist (No spaces).",
+          "pattern": "^[a-z0-9-]+$"
+        },
+        "display-name": {
+          "type": "string",
+          "description": "The name of the game to show in the menu."
+        },
+        "page-header": {
+          "type": "object",
+          "description": "Header properties to show in the checklist page.",
+          "additionalProperties": false,
+          "required": ["image", "title"],
+          "properties": {
+            "image": {
+              "$ref": "#/definitions/AppChecklistImage",
+              "description": "Image to show in the middle of the checklist at the top."
+            },
+            "title": {
+              "type": "string",
+              "description": "The title to show below the image and at the tab."
+            },
+            "subtitle": {
+              "type": "string",
+              "description": "The subtitle to show below the title."
+            }
+          }
+        },
+        "categories": {
+          "type": "array",
+          "description": "Categories to complete for the game.",
+          "items": {
+            "$ref": "#/definitions/AppChecklistCategory"
+          }
+        },
+        "map": {
+          "type": "string",
+          "description": "The url to the map image to show in the tab \"map\"."
+        },
+        "tabs": {
+          "type": "array",
+          "description": "Tabs to show in the checklist page.",
+          "items": {
+            "$ref": "#/definitions/AppChecklistTab"
+          }
+        },
+        "font": {
+          "type": "object",
+          "description": "The fonts to use in the checklist page.",
+          "additionalProperties": false,
+          "properties": {
+            "imports": {
+              "type": "array",
+              "description": "The urls to import the fonts (Can only be from https://fonts.google.com).",
+              "items": {
+                "type": "string"
+              }
+            },
+            "title": {
+              "type": "string",
+              "description": "The font to use for the title."
+            },
+            "subtitle": {
+              "type": "string",
+              "description": "The font to use for the subtitle."
+            },
+            "category-title": {
+              "type": "string",
+              "description": "The font to use for the category title."
+            },
+            "category-description": {
+              "type": "string",
+              "description": "The font to use for the category description."
+            },
+            "item-title": {
+              "type": "string",
+              "description": "The font to use for the item title."
+            },
+            "item-description": {
+              "type": "string",
+              "description": "The font to use for the item description."
+            },
+            "text": {
+              "type": "string",
+              "description": "The font to use for the text."
+            },
+            "tab": {
+              "type": "string",
+              "description": "The font to use for the tab."
+            }
+          }
+        },
+        "theme": {
+          "type": "string",
+          "description": "The theme to use in the checklist page.",
+          "pattern": "^(light|dark|device)$"
+        },
+        "background-image": {
+          "$ref": "#/definitions/AppChecklistImage",
+          "description": "The image to show in the checklist page as background."
+        },
+        "thumbnail-image": {
+          "$ref": "#/definitions/AppChecklistImage",
+          "description": "The image to show as a thumbnail in the menu and the home page."
+        }
+      }
+    }
+  }
+}

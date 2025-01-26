@@ -21,6 +21,12 @@ export declare global {
     description: string;
     /** The url for more information about the item (Like a wiki). */
     link?: string;
+    /**
+     * The paths (categoryId.itemId) for other items to be checked when this item is checked (Keep
+     * in mind this does not concatenate the related items, it a item in this list has more related
+     * items it won't check those).
+     */
+    related?: string[];
     /** The url to the map ref. */
     map?: string;
     /** A longer and more detailed explanation of the item. */
@@ -69,6 +75,8 @@ export declare global {
     id: string;
     /** The name of the game to show in the menu. */
     displayName: string;
+    /* The theme to use in the checklist page.. */
+    theme: 'light' | 'dark' | 'device';
     /** Header properties to show in the checklist page. */
     pageHeader: {
       /** Image to show in the middle of the checklist at the top. */
@@ -84,6 +92,27 @@ export declare global {
     map?: string;
     /** Tabs to show in the checklist page. */
     tabs?: AppChecklistTab[];
+    /** The fonts to use in the checklist page. */
+    fonts?: {
+      /** The urls to import the fonts (Can only be from https://fonts.google.com). */
+      imports?: string[];
+      /** The font to use for the title. */
+      title: string;
+      /** The font to use for the subtitle. */
+      subtitle?: string;
+      /** The font to use for the category title. */
+      categoryTitle?: string;
+      /** The font to use for the category description. */
+      categoryDescription?: string;
+      /** The font to use for the item title. */
+      itemTitle?: string;
+      /** The font to use for the item description. */
+      itemDescription?: string;
+      /** The font to use for the text. */
+      text?: string;
+      /** The font to use for the tab. */
+      tab?: string;
+    };
     /** The image to show in the checklist page as background. */
     backgroundImage?: AppChecklistImage;
     /** The image to show as a thumbnail in the menu and the home page. */
@@ -95,9 +124,11 @@ export declare global {
     /** Count of the items completed (percentage is calculated in the client). */
     itemsCompleted: number;
     /** Count of the items. */
-    itemsCount: number;
+    itemCount: number;
     /** Property to check if all items are completed. */
     isCompleted: boolean;
+    /** The percentage of the items completed. */
+    completePercentage: number;
     /** Property to check if os only a present or an available checklist. */
     isPreset: boolean;
   }

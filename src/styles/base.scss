@@ -1,8 +1,9 @@
 html {
   height: 100%;
-  margin: 0px;
-  padding: 0px;
+  margin: var(--space-0);
+  padding: var(--space-0);
 
+  background-image: var(--selected-image-url);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -10,20 +11,13 @@ html {
   scroll-behavior: smooth;
 
   // Default styling for the app (This might be override for each checklist).
-  font-family:
-    'Ubuntu Mono',
-    Roboto,
-    Segoe UI,
-    -apple-system,
-    Oxygen,
-    Ubuntu,
-    sans-serif;
+  font-family: var(--font-default);
   color: var(--text-primary);
   background-color: var(--background-main);
 }
 
 body {
   height: 100%;
-  margin: 0px;
-  padding: 0px;
+  margin: var(--space-0);
+  padding: var(--space-0);
 }
